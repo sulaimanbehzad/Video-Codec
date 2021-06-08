@@ -9,12 +9,13 @@ for i=1:nImages-48
     curImageName = [imageDir '\' imageFiles(i).name];
 %     printf(string(curImageName));
     curImage = imread(curImageName);
+    curImage = imresize(curImage, [512, 512]);
 %     change image to do
     curImageDouble = im2double(curImage);
-%     dct2(
 % Dimensions for DCT blocksize
     A=8;
     B=8;
-    dct{i}=ComputeDCT(curImageDouble, A, B);
+    curDct=ComputeDCT(curImageDouble, A, B);
+    disp(curDct)
     images{i}=curImage;
 end

@@ -1,7 +1,7 @@
-function [block] = ComputeDCT(img, A, B)
+function [im_transform] = ComputeDCT(img, A, B)
 %COMPUTEDCT Summary of this function goes here
 %   Detailed explanation goes here
-[imY, imX] = size(img);
+[imX, imY] = size(img);
 im_transform.block = zeros(A,B);
 normalization_matrix=[
     16 11 10 16 24 40 51 61
@@ -36,7 +36,6 @@ for a=1:imY/A
             end
         end
         im_transform(a,b).block = (im_transform(a,b).block./normalization_matrix);
-        im_transform.block
+%         im_transform.block
     end
 end
-block = im_transform.block;
