@@ -1,8 +1,7 @@
-function [] = ComputeZigZagR(I_runcode, A, B,M,N,m,n)
-im_reverce_transform.block = zeros(A,B);
+function [im_transform_reverce] = ComputeZigZagR(I_runcode, A, B,M,N,m,n)
 [imX, imY] = size(img);
 
-I_rec_Trnsfm.block=zeros(N,M);
+im_transform_reverce.block=zeros(N,M);
 for a=1:imY/N
     for b=1:imX/M
         bpp=length(I_runcode(a,b).code)/(N*M);  % "bpp" is the bits-per-pixel in reconstruction of image.
@@ -24,7 +23,7 @@ for a=1:imY/N
                         if decm_eq>(2^(n-1))-1
                             decm_eq=decm_eq-(2^n-1);
                         end
-                        I_rec_Trnsfm(a,b).block(x_indices(p),y_indices(p))=decm_eq;
+                        im_transform_reverce(a,b).block(x_indices(p),y_indices(p))=decm_eq;
                        c_indx=c_indx+1;
                     end
             else
@@ -41,10 +40,19 @@ for a=1:imY/N
                         if decm_eq>(2^(n-1))-1
                             decm_eq=decm_eq-(2^n-1);
                         end
-                        I_rec_Trnsfm(a,b).block(x_indices(p),y_indices(p))=decm_eq;
+                        im_transform_reverce(a,b).block(x_indices(p),y_indices(p))=decm_eq;
                         c_indx=c_indx+1;
                     end
             end
         end
     end
 end
+
+% Denormalizing the Reconstructed Tranform matrix using the same
+% Normalization matrix.
+for a=1:imY/N
+    for b=1:imX/M
+        im_transform_reverce(a,b).block=(I_rec_Trnsfm(a,b).block).*Norm_Mat;
+    end
+end
+
