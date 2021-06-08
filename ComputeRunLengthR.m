@@ -1,6 +1,9 @@
+function [I_runcode] = ComputeRunLengthR(I_runcode,M,N,n)
+[imX, imY] = size(I_runcode);
+
 % Run-Length Decoding of the compressed image.
-for a=1:I_dim(1)/N
-    for b=1:I_dim(2)/M
+for a=1:imY/N
+    for b=1:imX/M
         enc_str=I_runcode(a,b).code;
         
         % Computing the length of the encoded string.
@@ -63,3 +66,4 @@ for a=1:I_dim(1)/N
         I_runcode(a,b).code=dec_str;
     end
 end
+

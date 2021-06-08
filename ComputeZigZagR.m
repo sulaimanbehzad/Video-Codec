@@ -1,6 +1,10 @@
+function [] = ComputeZigZagR(I_runcode, A, B,M,N,m,n)
+im_reverce_transform.block = zeros(A,B);
+[imX, imY] = size(img);
+
 I_rec_Trnsfm.block=zeros(N,M);
-for a=1:I_dim(1)/N
-    for b=1:I_dim(2)/M
+for a=1:imY/N
+    for b=1:imX/M
         bpp=length(I_runcode(a,b).code)/(N*M);  % "bpp" is the bits-per-pixel in reconstruction of image.
         bpp_diff=n-bpp; 
         freq_sum=2:(N+M);
