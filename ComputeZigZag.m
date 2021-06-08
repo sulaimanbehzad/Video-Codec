@@ -1,46 +1,52 @@
-function [I_zigzag] = ComputeZigZag(I_Trsfrm, A, B, imX, imY, m, n)
-size(I_Trsfrm)
-I_zigzag.block = zeros(A, B);
+function [out_zigzag] = ComputeZigZag(out_dct, A, B, imX, imY, m, n)
+
+% size(out_dct)
+out_zigzag.block = zeros(A, B);
+%========================================================%
 for a=1:imX/B
     for b=1:imY/A
-        I_zigzag(a,b).block=zeros(1,0);
-        freq_sum=2:(B+A);
+        %================================================%
+        out_zigzag(a,b).block=zeros(1,0);
+        som_frequency=2:(B+A);
         counter=1;
-        for i=1:length(freq_sum)
-            if i<=((length(freq_sum)+1)/2)
+        %================================================%
+        for i=1:length(som_frequency)
+            if i<=((length(som_frequency)+1)/2)
                 if rem(i,2)~=0
-                    x_indices=counter:freq_sum(i)-counter;
+                    Ix=counter:som_frequency(i)-counter;
                 else
-                    x_indices=freq_sum(i)-counter:-1:counter;
+                    Ix=som_frequency(i)-counter:-1:counter;
                 end
-                    index_len=length(x_indices);
-                    y_indices=x_indices(index_len:-1:1);
+                    index_len=length(Ix);
+                    Iy=Ix(index_len:-1:1);
                     for p=1:index_len
-                        if I_Trsfrm(a,b).block(x_indices(p),y_indices(p))<0
-                            bin_eq=dec2bin(bitxor(2^n-1,abs(I_Trsfrm(a,b).block(x_indices(p),y_indices(p)))),n);
+                        if out_dct(a,b).block(Ix(p),Iy(p))<0
+                            bin_eq=dec2bin(bitxor(2^n-1,abs(out_dct(a,b).block(Ix(p),Iy(p)))),n);
                         else
-                            bin_eq=dec2bin(I_Trsfrm(a,b).block(x_indices(p),y_indices(p)),n);
+                            bin_eq=dec2bin(out_dct(a,b).block(Ix(p),Iy(p)),n);
                         end
-                        I_zigzag(a,b).block=[I_zigzag(a,b).block,bin_eq(1:m)];
+                        out_zigzag(a,b).block=[out_zigzag(a,b).block,bin_eq(1:m)];
                     end
             else
                 counter=counter+1;
                 if rem(i,2)~=0
-                    x_indices=counter:freq_sum(i)-counter;
+                    Ix=counter:som_frequency(i)-counter;
                 else
-                    x_indices=freq_sum(i)-counter:-1:counter;
+                    Ix=som_frequency(i)-counter:-1:counter;
                 end
-                    index_len=length(x_indices);
-                    y_indices=x_indices(index_len:-1:1);
+                    index_len=length(Ix);
+                    Iy=Ix(index_len:-1:1);
                     for p=1:index_len
-                        if I_Trsfrm(a,b).block(x_indices(p),y_indices(p))<0
-                            bin_eq=dec2bin(bitxor(2^n-1, abs(I_Trsfrm(a,b).block(x_indices(p),y_indices(p))),n));
+                        if out_dct(a,b).block(Ix(p),Iy(p))<0
+                            bin_eq=dec2bin(bitxor(2^n-1, abs(out_dct(a,b).block(Ix(p),Iy(p))),n));
                         else
-                            bin_eq=dec2bin(I_Trsfrm(a,b).block(x_indices(p),y_indices(p)),n);
+                            bin_eq=dec2bin(out_dct(a,b).block(Ix(p),Iy(p)),n);
                         end
-                        I_zigzag(a,b).block=[I_zigzag(a,b).block,bin_eq(1:m)];
+                        out_zigzag(a,b).block=[out_zigzag(a,b).block,bin_eq(1:m)];
                     end
             end
         end
+        %================================================%
     end
 end
+%========================================================%
