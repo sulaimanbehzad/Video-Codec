@@ -1,4 +1,4 @@
-function [I_rec] = ComputeDCTR(im_transform_reverce,imX,imY, A, B)
+function [I_rec] = ComputeDCTR(im_transform_reverce,A,B,imX,imY)
 
 for a=1:imX/B
     for b=1:imY/A

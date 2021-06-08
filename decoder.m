@@ -17,7 +17,7 @@ for i=1:nFiles
     curRL = curRL.curRunLength;
     curZigZag = ComputeRunLengthR(curRL, A, B, imX, imY, 10);
     curTransformInv = ComputeZigZagR(curZigZag,A,B,imX,imY,8,10);
-    curRecreatedImage = ComputeDCTR(curTransformInv,imX,imY, A, B);
+    curRecreatedImage = ComputeDCTR(curTransformInv,A,B,imX,imY);
     curRecreatedImage = curRecreatedImage/max(max(curRecreatedImage));
     curRecreatedImage = im2uint8(curRecreatedImage);
     figure, imshow(curRecreatedImage);

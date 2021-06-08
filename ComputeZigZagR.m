@@ -8,9 +8,9 @@ normalization_matrix=[
     24 35 55 64 81 104 113 92
     49 64 78 87 103 121 120 101
     72 92 95 98 112 100 103 99];
-im_transform_reverce.block=zeros(A,B);
-for a=1:imY/A
-    for b=1:imX/B
+im_transform_reverce.block=zeros(B,A);
+for a=1:imX/B
+    for b=1:imY/A
         bpp=length(I_runcode(a,b).code)/(A*B);  % "bpp" is the bits-per-pixel in reconstruction of image.
         bpp_diff=n-bpp; 
         freq_sum=2:(A+B);
@@ -57,8 +57,8 @@ end
 
 % Denormalizing the Reconstructed Tranform matrix using the same
 % Normalization matrix.
-for a=1:imY/A
-    for b=1:imX/B
+for a=1:imX/B
+    for b=1:imY/A
         im_transform_reverce(a,b).block=(im_transform_reverce(a,b).block).*normalization_matrix;
     end
 end
