@@ -1,37 +1,37 @@
-function [I_runcode] = RunLength(I_zigzag, A, B, imX, imY)
-size(I_zigzag)
+function [outputRunLength] = RunLength(imZigZag, A, B, imX, imY)
+size(imZigZag)
 for a=1:imX/B
     for b=1:imY/A
         
-        count=0;
+        cnt=0;
         run=zeros(1,0);
-        sym=I_zigzag(a,b).block(1);
+        temp=imZigZag(a,b).block(1);
         j=1;
-        block_len=length(I_zigzag(a,b).block);
-        for i=1:block_len
-            if I_zigzag(a,b).block(i)==sym
-                count=count+1;
+        blockSize=length(imZigZag(a,b).block);
+        for i=1:blockSize
+            if imZigZag(a,b).block(i)==temp
+                cnt=cnt+1;
             else
-                run.count(j)=count;
-                run.sym(j)=sym;
+                run.count(j)=cnt;
+                run.temp(j)=temp;
                 j=j+1;
-                sym=I_zigzag(a,b).block(i);
-                count=1;
+                temp=imZigZag(a,b).block(i);
+                cnt=1;
             end
-            if i==block_len
-                run.count(j)=count;
-                run.sym(j)=sym;
+            if i==blockSize
+                run.count(j)=cnt;
+                run.temp(j)=temp;
             end
         end 
         
-        dim=length(run.count);  
-        maxvalue=max(run.count); 
-        codelength=log2(maxvalue)+1;
-        codelength=floor(codelength);
+        dimension=length(run.count);  
+        maxVal=max(run.count); 
+        codeLength=log2(maxVal)+1;
+        codeLength=floor(codeLength);
         
-        I_runcode(a,b).code=zeros(1,0);
-        for i=1:dim
-            I_runcode(a,b).code=[I_runcode(a,b).code,dec2bin(run.count(i),codelength),run.sym(i)];
+        outputRunLength(a,b).code=zeros(1,0);
+        for i=1:dimension
+            outputRunLength(a,b).code=[outputRunLength(a,b).code,dec2bin(run.count(i),codeLength),run.temp(i)];
         end
     end
 end

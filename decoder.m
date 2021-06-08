@@ -20,7 +20,12 @@ for i=1:nFiles
     curRecreatedImage = ComputeDCTR(curTransformInv,A,B,imX,imY);
     curRecreatedImage = curRecreatedImage/max(max(curRecreatedImage));
     curRecreatedImage = im2uint8(curRecreatedImage);
-    figure, imshow(curRecreatedImage);
+%     figure, imshow(curRecreatedImage);
+%   Write images
+    outputPath = 'C:\Users\lenovo\Documents\MATLAB\Video-Codec\recreated';
+    outputFileName = sprintf('Frame %4.4d.png', i);
+    outputFullPath = fullfile(outputPath, outputFileName);
+    imwrite(curRecreatedImage, outputFullPath, 'png');
 %     curImage = imread(curImageName);
 %     curImage = imresize(curImage, [512, 512]);
 % %     change image to do
