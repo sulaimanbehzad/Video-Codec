@@ -35,7 +35,7 @@ for a=1:imY/A
                 end
             end
         end
-        im_transform(a,b).block = (im_transform(a,b).block./normalization_matrix);
+        im_transform(a,b).block = round(im_transform(a,b).block./normalization_matrix);
 %         im_transform.block
     end
 end

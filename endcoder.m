@@ -16,6 +16,8 @@ for i=1:nImages-48
     A=8;
     B=8;
     curDct=ComputeDCT(curImageDouble, A, B);
-    disp(curDct)
+    curZigZag = ComputeZigZag(curDct, A, B, 8, 10);
+    curRunLength = RunLength(curZigZag, curImage, A, B);
+    disp(curRunLength)
     images{i}=curImage;
 end
