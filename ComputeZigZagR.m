@@ -61,7 +61,7 @@ for a=1:imX/B
     end
 end
 %=====================================================%
-
+% dar in ja az hmaan matrsi bala dar jahat akse normalize estefade mikonim
 for a=1:imX/B
     for b=1:imY/A
         out_zigzag_reverse(a,b).block=(out_zigzag_reverse(a,b).block).*normalization_matrix;

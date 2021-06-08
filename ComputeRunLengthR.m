@@ -1,10 +1,11 @@
-function [I_runcode] = ComputeRunLengthR(I_runcode,A,B,imX, imY,n)
+function [out_run_length] = ComputeRunLengthR(out_run_length,A,B,imX, imY,n)
 
 for a=1:imX/B
     for b=1:imY/A
-        enc_str=I_runcode(a,b).code;
+        %========================================%
+        enc_str=out_run_length(a,b).code;
         enc_len=length(enc_str);
-             
+        
         factors_mat=zeros(1,0);
         if enc_len<=(n+1)
             realfact=enc_len;
@@ -40,7 +41,6 @@ for a=1:imX/B
             end
         end
         
-        clear factors_mat flagcntr j 
         dec_str=zeros(1,0);
         temp_dim=enc_len/realfact;
         for i=1:temp_dim
@@ -50,7 +50,8 @@ for a=1:imX/B
                 dec_str=[dec_str,enc_str(i*realfact)];
             end
         end
-        I_runcode(a,b).code=dec_str;
+        out_run_length(a,b).code=dec_str;
+        %========================================%
     end
 end
-
+%========================================%
