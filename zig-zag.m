@@ -1,5 +1,9 @@
-for a=1:I_dim(1)/N
-    for b=1:I_dim(2)/M
+function [I_zigzag] = ComputeZigZag(I_Trsfrm, A, B)
+[imY, imX] = size(I_Trsfrm);
+
+
+for a=1:imX/N
+    for b=1:imY/M
         I_zigzag(a,b).block=zeros(1,0);
         freq_sum=2:(N+M);
         counter=1;
@@ -41,3 +45,4 @@ for a=1:I_dim(1)/N
         end
     end
 end
+I_zigzag = I_zigzag.block ;
