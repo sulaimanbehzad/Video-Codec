@@ -3,8 +3,6 @@ size(I_zigzag)
 for a=1:imX/B
     for b=1:imY/A
         
-        % Computing the Count values for the corresponding symbols and
-        % savin them in "I_run" structure.
         count=0;
         run=zeros(1,0);
         sym=I_zigzag(a,b).block(1);
@@ -26,13 +24,11 @@ for a=1:imX/B
             end
         end 
         
-        % Computing the codelength needed for the count values.
-        dim=length(run.count);  % calculates number of symbols being encoded.
-        maxvalue=max(run.count);  % finds the maximum count value in the count array of run structure.
+        dim=length(run.count);  
+        maxvalue=max(run.count); 
         codelength=log2(maxvalue)+1;
         codelength=floor(codelength);
         
-        % Encoding the count values along with their symbols.
         I_runcode(a,b).code=zeros(1,0);
         for i=1:dim
             I_runcode(a,b).code=[I_runcode(a,b).code,dec2bin(run.count(i),codelength),run.sym(i)];

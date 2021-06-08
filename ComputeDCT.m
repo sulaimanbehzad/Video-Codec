@@ -20,20 +20,23 @@ for a=1:imX/N
                         prod=prod+double(img(N*(a-1)+i,M*(b-1)+j))*cos(pi*(k-1)*(2*i-1)/(2*N))*cos(pi*(l-1)*(2*j-1)/(2*M));
                     end
                 end
+                
                 if k==1
                     prod=prod*sqrt(1/N);
-                else
+                    else
                     prod=prod*sqrt(2/N);
                 end
+                
                 if l==1
                     prod=prod*sqrt(1/M);
                 else
                     prod=prod*sqrt(2/M);
                 end
+                
                 I_Trsfrm(a,b).block(k,l)=prod;
             end
         end
-        % Normalizing the DCT Matrix and Quantizing the resulting values.
+        
         I_Trsfrm(a,b).block=round(I_Trsfrm(a,b).block./normalization_matrix);
     end
 end

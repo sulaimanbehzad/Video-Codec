@@ -11,7 +11,7 @@ normalization_matrix=[
 im_transform_reverce.block=zeros(B,A);
 for a=1:imX/B
     for b=1:imY/A
-        bpp=length(I_runcode(a,b).code)/(A*B);  % "bpp" is the bits-per-pixel in reconstruction of image.
+        bpp=length(I_runcode(a,b).code)/(A*B);  
         bpp_diff=n-bpp; 
         freq_sum=2:(A+B);
         counter=1;
@@ -24,7 +24,7 @@ for a=1:imX/B
                     x_indices=freq_sum(i)-counter:-1:counter;
                 end
                     index_len=length(x_indices);
-                    y_indices=x_indices(index_len:-1:1); % Creating reverse of the array as "y_indices".
+                    y_indices=x_indices(index_len:-1:1); 
                     for p=1:index_len
                         decm_eq=bin2dec([I_runcode(a,b).code(1+m*(c_indx-1):m*c_indx),dec2bin(0,bpp_diff)]);
                         if decm_eq>(2^(n-1))-1
@@ -41,7 +41,7 @@ for a=1:imX/B
                     x_indices=freq_sum(i)-counter:-1:counter;
                 end
                     index_len=length(x_indices);
-                    y_indices=x_indices(index_len:-1:1); % Creating reverse of the array as "y_indices".
+                    y_indices=x_indices(index_len:-1:1); 
                     for p=1:index_len
                         decm_eq=bin2dec([I_runcode(a,b).code(1+m*(c_indx-1):m*c_indx),dec2bin(0,bpp_diff)]);
                         if decm_eq>(2^(n-1))-1
@@ -55,8 +55,7 @@ for a=1:imX/B
     end
 end
 
-% Denormalizing the Reconstructed Tranform matrix using the same
-% Normalization matrix.
+
 for a=1:imX/B
     for b=1:imY/A
         im_transform_reverce(a,b).block=(im_transform_reverce(a,b).block).*normalization_matrix;

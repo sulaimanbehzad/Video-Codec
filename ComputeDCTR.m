@@ -1,9 +1,11 @@
 function [I_rec] = ComputeDCTR(im_transform_reverce,A,B,imX,imY)
-
+% in function vazife mohasebe DCT ra bar ohde dard
 for a=1:imX/B
     for b=1:imY/A
+        %===============================================%
         for i=1:B
             for j=1:A
+                %=======================================%
                 prod=0;
                 for k=1:B
                     for l=1:A
@@ -20,8 +22,10 @@ for a=1:imX/B
                 end
                 prod=prod*(2/sqrt(A*B));
                 I_rec((a-1)*B+i,(b-1)*A+j)=prod;
+                %=======================================%
             end
         end
+        %===============================================%
     end
 end
 
