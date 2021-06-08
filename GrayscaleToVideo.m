@@ -11,12 +11,14 @@ open(vidWriter);
 recreatedImages = dir('recreated/*.png');
 nFiles = length(recreatedImages);
 recDir = recreatedImages.folder;
+images=cell(50,1);
 for i=1:nFiles
     curFileName = [recDir '\' recreatedImages(i).name];
     images{i} = imread(curFileName);
 end
 for k=1:length(images)
-    frame = im2frame(images{k});
+    rgbImage = ind2rgb(images{k}, jet(256));
+    frame = im2frame(rgbImage);
     writeVideo(vidWriter,frame);
 end
 close(vidWriter);
