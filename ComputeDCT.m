@@ -1,6 +1,5 @@
 function [im_transform] = ComputeDCT(img, A, B)
-%COMPUTEDCT Summary of this function goes here
-%   Detailed explanation goes here
+% This function computes the DCT coefficients
 [imX, imY] = size(img);
 im_transform.block = zeros(A,B);
 normalization_matrix=[
@@ -36,6 +35,5 @@ for a=1:imY/A
             end
         end
         im_transform(a,b).block = round(im_transform(a,b).block./normalization_matrix);
-%         im_transform.block
     end
 end
