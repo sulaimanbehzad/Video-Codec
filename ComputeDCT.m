@@ -1,7 +1,6 @@
-function [im_transform] = ComputeDCT(img, A, B)
+function [I_Trsfrm] = ComputeDCT(img, M, N, imX, imY)
 % This function computes the DCT coefficients
-[imX, imY] = size(img);
-im_transform.block = zeros(A,B);
+I_Trsfrm.block = zeros(M,N);
 normalization_matrix=[
     16 11 10 16 24 40 51 61
     12 12 14 19 26 58 60 55
@@ -11,29 +10,30 @@ normalization_matrix=[
     24 35 55 64 81 104 113 92
     49 64 78 87 103 121 120 101
     72 92 95 98 112 100 103 99];
-for a=1:imY/A
-    for b=1:imX/B
-        for k=1:A
-            for l=1:B
-                res=0;
-                for i=1:A
-                    for j=1:B
-                        res=res+double(img(A*(a-1)+i,B*(b-1)+j))*cos(pi*(k-1)*(2*i-1)/(2*A))*cos(pi*(l-1)*(2*j-1)/(2*B));    
+for a=1:imX/N
+    for b=1:imY/M
+        for k=1:N
+            for l=1:M
+                prod=0;
+                for i=1:N
+                    for j=1:M
+                        prod=prod+double(img(N*(a-1)+i,M*(b-1)+j))*cos(pi*(k-1)*(2*i-1)/(2*N))*cos(pi*(l-1)*(2*j-1)/(2*M));
                     end
-                     if k==1
-                         res = res*sqrt(1/A);
-                     else
-                         res = res*sqrt(2/A);
-                     end
-                     if l==1
-                         res = res*sqrt(1/B);
-                     else
-                         res = res*sqrt(2/B);
-                     end
-                     im_transform(a,b).block(k,l)=res;
                 end
+                if k==1
+                    prod=prod*sqrt(1/N);
+                else
+                    prod=prod*sqrt(2/N);
+                end
+                if l==1
+                    prod=prod*sqrt(1/M);
+                else
+                    prod=prod*sqrt(2/M);
+                end
+                I_Trsfrm(a,b).block(k,l)=prod;
             end
         end
-        im_transform(a,b).block = round(im_transform(a,b).block./normalization_matrix);
+        % Normalizing the DCT Matrix and Quantizing the resulting values.
+        I_Trsfrm(a,b).block=round(I_Trsfrm(a,b).block./normalization_matrix);
     end
 end

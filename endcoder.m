@@ -15,9 +15,9 @@ for i=1:nImages-48
 % Dimensions for DCT blocksize
     A=8;
     B=8;
-    curDct=ComputeDCT(curImageDouble, A, B);
     [imX, imY] = size(curImageDouble);
-    curZigZag = ComputeZigZag(curDct, A, B, imX, imY, 8, 10);
+    curDct=ComputeDCT(curImageDouble, A, B, imX, imY);
+    curZigZag = ComputeZigZag(curDct, A, B, imX, imY, 8, 8);
     curRunLength = RunLength(curZigZag, A, B, imX, imY);
     save(['runlength/' imageFiles(i).name '.mat'], 'curRunLength');
 %     fprintf(fileID, curRunLength);
