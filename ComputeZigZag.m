@@ -1,11 +1,9 @@
 function [I_zigzag] = ComputeZigZag(I_Trsfrm, A, B)
-[imY, imX] = size(I_Trsfrm);
-
-
-for a=1:imX/N
-    for b=1:imY/M
+[imX, imY] = size(I_Trsfrm);
+for a=1:imY/B
+    for b=1:imX/A
         I_zigzag(a,b).block=zeros(1,0);
-        freq_sum=2:(N+M);
+        freq_sum=2:(A+B);
         counter=1;
         for i=1:length(freq_sum)
             if i<=((length(freq_sum)+1)/2)
@@ -45,4 +43,3 @@ for a=1:imX/N
         end
     end
 end
-I_zigzag = I_zigzag.block ;
