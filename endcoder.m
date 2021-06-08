@@ -19,8 +19,8 @@ for i=1:nImages-48
     [imX, imY] = size(curImageDouble);
     curZigZag = ComputeZigZag(curDct, A, B, imX, imY, 8, 10);
     curRunLength = RunLength(curZigZag, A, B, imX, imY);
-    fileID = fopen(['runlength/' imageFiles(i).name '.txt'], 'at');
-    fprintf(fileID, curRunLength);
+    save(['runlength/' imageFiles(i).name '.mat'], 'curRunLength');
+%     fprintf(fileID, curRunLength);
 %     disp(curRunLength)
 %     images{i}=curImage;
 end
