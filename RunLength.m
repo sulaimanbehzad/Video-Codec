@@ -1,5 +1,5 @@
-function [I_runcode] = RunLength(I_zigzag, img, A, B)
-[imX, imY] = size(img);
+function [I_runcode] = RunLength(I_zigzag, A, B, imX, imY)
+size(I_zigzag)
 for a=1:imX/B
     for b=1:imY/A
         

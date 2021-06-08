@@ -1,6 +1,6 @@
-function [I_zigzag] = ComputeZigZag(I_Trsfrm, A, B, m, n)
+function [I_zigzag] = ComputeZigZag(I_Trsfrm, A, B, imX, imY, m, n)
 size(I_Trsfrm)
-[imX, imY] = size(I_Trsfrm);
+I_zigzag.block = zeros(A, B);
 for a=1:imX/B
     for b=1:imY/A
         I_zigzag(a,b).block=zeros(1,0);
@@ -35,7 +35,7 @@ for a=1:imX/B
                     y_indices=x_indices(index_len:-1:1); % Creating reverse of the array as "y_indices".
                     for p=1:index_len
                         if I_Trsfrm(a,b).block(x_indices(p),y_indices(p))<0
-                            bin_eq=dec2bin(bitxor(2^n-1, uint8(abs(I_Trsfrm(a,b).block(x_indices(p),y_indices(p)))),n));
+                            bin_eq=dec2bin(bitxor(2^n-1, abs(I_Trsfrm(a,b).block(x_indices(p),y_indices(p))),n));
                         else
                             bin_eq=dec2bin(I_Trsfrm(a,b).block(x_indices(p),y_indices(p)),n);
                         end
